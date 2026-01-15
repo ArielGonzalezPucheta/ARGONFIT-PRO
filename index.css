@@ -1,0 +1,38 @@
+/* Global Styles for ARGON FIT PRO */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --argon-emerald: #10B981;
+  --argon-glow: rgba(16, 185, 129, 0.4);
+  --argon-black: #050706;
+}
+
+body {
+  background-color: var(--argon-black);
+  color: #E2E8F0;
+}
+
+/* Utilities */
+.skeleton-loader {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--argon-black); }
+::-webkit-scrollbar-thumb { background: #151B18; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); }
+::-webkit-scrollbar-thumb:hover { background: var(--argon-emerald); }
+
+/* Animation Utils */
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }

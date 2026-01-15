@@ -1,0 +1,8 @@
+{
+  "name": "ARGON FIT PRO",
+  "description": "ARGON FIT PRO - The Ultimate AI Fitness Companion",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
