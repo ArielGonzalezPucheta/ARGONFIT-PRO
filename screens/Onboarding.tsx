@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Eye, EyeOff } from 'lucide-react';
 import { Button, Badge, Card } from '../components/UI';
 import { UserProfile, Goal } from '../types';
 import { aiService } from '../services/ai';
@@ -45,26 +46,43 @@ const NeonInput = ({
   placeholder?: string,
   icon: React.ReactNode,
   autoComplete?: string
-}) => (
-  <div className="group relative w-full">
-    <label className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em] mb-2 block group-focus-within:text-emerald-500 transition-colors">{label}</label>
-    <div className="relative flex items-center">
-      <div className="absolute left-4 text-zinc-600 group-focus-within:text-emerald-500 transition-colors pointer-events-none">
-        {icon}
+}) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const isPassword = type === 'password';
+  const inputType = isPassword && showPassword ? 'text' : type;
+
+  return (
+    <div className="group relative w-full">
+      <label className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em] mb-2 block group-focus-within:text-emerald-500 transition-colors">{label}</label>
+      <div className="relative flex items-center">
+        <div className="absolute left-4 text-zinc-600 group-focus-within:text-emerald-500 transition-colors pointer-events-none">
+          {icon}
+        </div>
+        <input
+          type={inputType}
+          value={value}
+          onChange={e => onChange(e.target.value)}
+          placeholder={placeholder}
+          autoComplete={autoComplete}
+          className="w-full bg-[#0F1210] border border-white/10 rounded-xl py-4 pl-12 pr-12 text-white font-medium placeholder:text-zinc-700 outline-none focus:bg-[#151B18] focus:border-emerald-500/50 transition-all"
+        />
+        {/* Password Visibility Toggle */}
+        {isPassword && (
+          <button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            className="absolute right-4 text-zinc-600 hover:text-emerald-500 transition-colors focus:outline-none"
+            aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        )}
+        {/* Animated Bottom Border */}
+        <div className="absolute bottom-0 left-2 right-2 h-[1px] bg-emerald-500 scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300 origin-center" />
       </div>
-      <input
-        type={type}
-        value={value}
-        onChange={e => onChange(e.target.value)}
-        placeholder={placeholder}
-        autoComplete={autoComplete}
-        className="w-full bg-[#0F1210] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white font-medium placeholder:text-zinc-700 outline-none focus:bg-[#151B18] focus:border-emerald-500/50 transition-all"
-      />
-      {/* Animated Bottom Border */}
-      <div className="absolute bottom-0 left-2 right-2 h-[1px] bg-emerald-500 scale-x-0 group-focus-within:scale-x-100 transition-transform duration-300 origin-center" />
     </div>
-  </div>
-);
+  );
+};
 
 // --- COMPONENTE PRINCIPAL ---
 
